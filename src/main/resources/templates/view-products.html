@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Supplier Dashboard - Products</title>
+    <link rel="stylesheet" href="/css/supplier.css">
+</head>
+<body>
+<header>
+    <h1>Supplier Dashboard</h1>
+    <nav>
+        <a th:href="@{/supplier/dashboard}">Home</a>
+        <a th:href="@{/supplier/logout}">Logout</a>
+    </nav>
+</header>
+<main>
+    <h2>My Products</h2>
+    <a th:href="@{/supplier/add-products}" class="btn">Add New Product</a>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.price}"></td>
+            <td>
+                <a th:href="@{'/supplier/edit-product/' + ${product.id}}" class="btn btn-primary">Edit</a>
+                <a th:href="@{'/supplier/delete-product/' + ${product.id}}" class="btn btn-danger" onclick="return confirm('Are you sure yoy want to delete this product?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

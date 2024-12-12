@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Inventory</title>
+    <link rel="stylesheet" href="/css/homepage.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <!-- Company name on the left -->
+        <a class="navbar-brand" href="#"><img th:src="@{/assets/trolley1.png}">   EasyCart</a>
+
+
+        <!-- Login and Signup buttons on the right -->
+        <div class="navbar-buttons">
+            <a href="/login" class="btn btn-primary">Login</a>
+            <a href="/signup" class="btn btn-secondary">Signup</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <!-- Main content for the homepage -->
+    <h1>Welcome to the EasyCart</h1>
+    <p>Explore a wide range of products available for purchase.</p>
+</div>
+
+</body>
+</html>

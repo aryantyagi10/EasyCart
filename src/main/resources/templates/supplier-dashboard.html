@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supplier Dashboard</title>
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+<header class="dashboard-header">
+  <h1>Welcome to the supplier dashboard</h1>
+  <nav>
+    <ul>
+      <li><a th:href="@{/supplier/profile}">Profile</a></li>
+      <li><a th:href="@{/supplier/logout}">Logout</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="dashboard-content">
+  <h2>Manage Your Products</h2>
+  <p>Here you can add, edit, or delete your products.</p>
+  <div class="dashboard-actions">
+    <a th:href ="@{/supplier/add-products}" class="btn">Add Product</a>
+    <a th:href ="@{/supplier/view-products}" class="btn">View Products</a>
+  </div>
+</main>
+
+<footer class="dashboard-footer">
+  <p>&copy; 2024 Supplier Portal. All rights reserved.</p>
+</footer>
+</body>
+</html>
