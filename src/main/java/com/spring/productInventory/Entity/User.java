@@ -12,7 +12,7 @@ public class User {
 
     private String firstName;
 
-    private String lastname;
+    private String lastName;
 
     private String email;
 
@@ -31,10 +31,10 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String firstName, String lastname, String email, String password, String username, String role, Customer customer, Supplier supplier) {
+    public User(Long id, String firstName, String lastName, String email, String password, String username, String role, Customer customer, Supplier supplier) {
         this.id = id;
         this.firstName = firstName;
-        this.lastname = lastname;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.username = username;
@@ -60,11 +60,11 @@ public class User {
     }
 
     public String getLastname() {
-        return lastname;
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastname(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -120,7 +120,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
-                ", lastname='" + lastname + '\'' +
+                ", lastname='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", username='" + username + '\'' +

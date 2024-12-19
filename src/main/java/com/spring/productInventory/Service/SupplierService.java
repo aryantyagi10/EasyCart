@@ -33,4 +33,10 @@ public class SupplierService {
     public Supplier findByUser(User user) {
         return supplierRepository.findByUser(user);
     }
+
+    public Supplier update(Long supplierId, String contact) {
+        Supplier supplier = supplierRepository.findById(supplierId).orElseThrow(()-> new RuntimeException("Supplier not found"));
+        supplier.setContact(contact);
+        return supplierRepository.save(supplier);
+    }
 }

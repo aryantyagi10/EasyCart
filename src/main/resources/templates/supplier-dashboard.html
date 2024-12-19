@@ -11,7 +11,7 @@
   <h1>Welcome to the supplier dashboard</h1>
   <nav>
     <ul>
-      <li><a th:href="@{/supplier/profile}">Profile</a></li>
+      <li><a th:href="@{/supplier/profile(supplierId=${supplier.id})}">Profile</a></li>
       <li><a th:href="@{/supplier/logout}">Logout</a></li>
     </ul>
   </nav>

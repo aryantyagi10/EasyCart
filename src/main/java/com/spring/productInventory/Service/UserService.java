@@ -33,4 +33,7 @@ public class UserService {
         return userRepository.findByEmailAndPassword(email, password).orElse(null);
     }
 
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found"));
+    }
 }

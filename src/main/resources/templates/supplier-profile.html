@@ -1,14 +1,68 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supplier Profile</title>
+  <link rel="stylesheet" href="/css/supplier-profile.css">
 </head>
 <body>
-<h1>tdgjks</h1>
+<header>
+  <h1>Supplier Profile</h1>
+  <nav>
+    <a th:href="@{'/supplier/dashboard?supplierId='+ ${supplierId}}">Home</a>
+    <a th:href="@{/supplier/logout}">Logout</a>
+  </nav>
+</header>
+<div class="profile-container">
+  <form th:action="@{/supplier/profile}" method="post">
+    <input type="hidden" name="supplierId" th:value="${supplier.id}">
+    <!-- Supplier ID (Read-only) -->
+    <div class="form-group">
+      <label for="supplierId">Supplier ID</label>
+      <input type="text" id="supplierId" name="supplierId" th:value="${supplier.id}" readonly>
+    </div>
 
+    <!-- First Name (Read-only) -->
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" th:value="${user.firstName}" readonly>
+    </div>
+
+    <!-- Last Name (Read-only) -->
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" th:value="${user.lastname}" readonly>
+    </div>
+
+    <!-- Email (Read-only) -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" th:value="${user.email}" readonly>
+    </div>
+
+    <!-- Username (Read-only) -->
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" th:value="${user.username}" readonly>
+    </div>
+
+    <!-- Contact (Editable) -->
+    <div class="form-group">
+      <label for="contact">Contact</label>
+      <input type="text" id="contact" name="contact" th:value="${supplier.contact}" placeholder="Enter new contact">
+    </div>
+
+    <!-- Password (Editable)
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter new password">
+    </div> -->
+
+    <div class="form-actions">
+      <button type="submit" class="save-btn">Save Changes</button>
+    </div>
+  </form>
+</div>
 </body>
 </html>

@@ -2,15 +2,16 @@ package com.spring.productInventory.Controller;
 
 import com.spring.productInventory.Entity.Product;
 import com.spring.productInventory.Entity.Supplier;
+import com.spring.productInventory.Entity.User;
 import com.spring.productInventory.Service.ProductService;
 import com.spring.productInventory.Service.SupplierService;
 import com.spring.productInventory.Service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Controller
@@ -40,6 +41,23 @@ public class SupplierController {
         return "index";
     }
 
+    @GetMapping("/profile")
+    public String showProfilePage(@RequestParam("supplierId") Long supplierId,Model model){
+        Supplier supplier = supplierService.getSupplierById(supplierId).orElseThrow(() -> new RuntimeException("Supplier not found"));
+        User user = userService.getUserById(supplier.getUser().getId());
+        model.addAttribute("supplier", supplier);
+        model.addAttribute("user", user);
+        return "supplier-profile";
+    }
+
+    @PostMapping("/profile")
+    public String updateProfile(@RequestParam("supplierId") Long supplierId, @RequestParam("contact") String contact, RedirectAttributes redirectAttributes){
+        Supplier supplier = supplierService.getSupplierById(supplierId).orElseThrow(()-> new RuntimeException("Supplier not found"));
+        supplierService.update(supplierId, contact);
+        redirectAttributes.addAttribute("supplierId", supplier.getId());
+        return "redirect:/supplier/profile";
+    }
+
     @GetMapping("/add-products")
     public String showAddProductForm(@ModelAttribute("supplierId") Long supplierId, Model model){
         if (supplierId != null) {
@@ -50,7 +68,7 @@ public class SupplierController {
         return "redirect:/login";
     }
 
-    @PostMapping("/add-products")
+    @PostMapping ("/add-products")
     public String addProduct(@ModelAttribute Product product, @ModelAttribute("supplierId") Long supplierId){
         if (supplierId == null){
             return "redirect:/login";

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @SessionAttributes("supplierId")
@@ -46,7 +47,7 @@ public class LoginController {
                 Supplier supplier = supplierService.findByUser(user);
                 if (supplier != null) {
                     model.addAttribute("supplierId", supplier.getId());
-                    return "supplier-dashboard";
+                    return "redirect:/supplier/dashboard?supplierId=" + supplier.getId();
                 }
             }
         }
