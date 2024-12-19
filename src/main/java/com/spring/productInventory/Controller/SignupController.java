@@ -35,6 +35,10 @@ public class SignupController {
     @PostMapping("/signup")
     public String signup(@ModelAttribute User user, @RequestParam String role, Model model){
 
+        //Debugging
+        System.out.println("firstName: " + user.getFirstName());
+        System.out.println("lastName: " + user.getLastName());
+
         if(userService.isEmailExists(user.getEmail())){
             model.addAttribute("error", "Email already exists");
             return "signup";
