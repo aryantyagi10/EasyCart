@@ -4,6 +4,7 @@ import com.spring.productInventory.Entity.Product;
 import com.spring.productInventory.Entity.Supplier;
 import com.spring.productInventory.Repository.ProductRepository;
 import com.spring.productInventory.Repository.SupplierRepository;
+import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

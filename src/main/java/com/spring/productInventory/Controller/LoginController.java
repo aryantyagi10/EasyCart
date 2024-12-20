@@ -41,7 +41,7 @@ public class LoginController {
                 Customer customer = customerService.findByUser(user);
                 if (customer != null){
                     model.addAttribute("customerId", customer.getId());
-                    return "customer-dashboard";
+                    return "redirect:/customer/dashboard?customerId=" + customer.getId();
                 }
             } else if("supplier".equalsIgnoreCase(user.getRole())){
                 Supplier supplier = supplierService.findByUser(user);

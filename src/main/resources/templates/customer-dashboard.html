@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +11,8 @@
     <h1>Welcome to the Customer Dashboard</h1>
     <nav>
         <ul>
-            <li><a href="/customer-profile">Profile</a></li>
-            <li><a href="/customer-logout">Logout</a></li>
+            <li><a th:href="@{/customer/profile(customerId=${customer.id})}">Profile</a></li>
+            <li><a th:href="@{/customer/logout}">Logout</a></li>
         </ul>
     </nav>
 </header>
@@ -21,8 +21,8 @@
     <h2>Browse and Shop</h2>
     <p>Explore a wide range of products and manage your cart.</p>
     <div class="dashboard-actions">
-        <a href="/browse-products" class="btn">Browse Products</a>
-        <a href="/cart" class="btn">View Cart</a>
+        <a th:href="@{/customer/products}" class="btn">Browse Products</a>
+        <a th:href="@{/customer/cart}" class="btn">View Cart</a>
     </div>
 </main>
 

@@ -14,7 +14,7 @@ public class Customer {
 
     private String addressLine2;
 
-    private String ciy;
+    private String city;
 
     private String postalCode;
 
@@ -24,17 +24,22 @@ public class Customer {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Cart cart;
+
     public Customer() {
     }
 
-    public Customer(Long id, String addressLine1, String addressLine2, String ciy, String postalCode, String country, User user) {
+    public Customer(Long id, String addressLine1, String addressLine2, String city, String postalCode, String country, User user, Cart cart) {
         this.id = id;
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
-        this.ciy = ciy;
+        this.city = city;
         this.postalCode = postalCode;
         this.country = country;
         this.user = user;
+        this.cart = cart;
+
     }
 
     public Long getId() {
@@ -61,12 +66,12 @@ public class Customer {
         this.addressLine2 = addressLine2;
     }
 
-    public String getCiy() {
-        return ciy;
+    public String getCity() {
+        return city;
     }
 
-    public void setCiy(String ciy) {
-        this.ciy = ciy;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getPostalCode() {
@@ -93,16 +98,25 @@ public class Customer {
         this.user = user;
     }
 
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
                 "id=" + id +
                 ", addressLine1='" + addressLine1 + '\'' +
                 ", addressLine2='" + addressLine2 + '\'' +
-                ", ciy='" + ciy + '\'' +
+                ", city='" + city + '\'' +
                 ", postalCode='" + postalCode + '\'' +
                 ", country='" + country + '\'' +
                 ", user=" + user +
+                ", cart=" + cart +
                 '}';
     }
 }
