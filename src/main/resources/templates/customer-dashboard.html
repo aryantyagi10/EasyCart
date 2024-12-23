@@ -21,8 +21,8 @@
     <h2>Browse and Shop</h2>
     <p>Explore a wide range of products and manage your cart.</p>
     <div class="dashboard-actions">
-        <a th:href="@{/customer/products}" class="btn">Browse Products</a>
-        <a th:href="@{/customer/cart}" class="btn">View Cart</a>
+        <a th:href="@{/customer/products(customerId=${customer.id})}" class="btn">Browse Products</a>
+        <a th:href="@{/customer/cart(customerId=${customer.id})}" class="btn">View Cart</a>
     </div>
 </main>
 

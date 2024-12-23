@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Cart</title>
+    <link rel="stylesheet" href="/css/cart.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Your Cart</h1>
+        <a th:href="@{/customer/dashboard(customerId=${customer.id})}" class="back-button">Back to Dashboard</a>
+    </header>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${cartProducts}">
+            <td th:text="${product.name}">Product Name</td>
+            <td th:text="${product.description}">Description</td>
+            <td th:text="${product.price}">0.00</td>
+            <td>
+                <form th:action="@{/customer/remove-from-cart}" method="post">
+                    <input type="hidden" name="productId" th:value="${product.id}">
+                    <input type="hidden" name="customerId" th:value="${customer.id}">
+                    <button type="submit">Remove from Cart</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Total Price: ₹<span th:text="${totalPrice}">0.00</span></h3>
+
+    <form th:action="@{/customer/place-order}" method="post">
+        <input type="hidden" name="customerId" th:value="${customer.id}">
+        <button type="submit">Place Order</button>
+    </form>
+</div>
+</body>
+</html>

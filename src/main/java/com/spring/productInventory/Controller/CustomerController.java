@@ -4,16 +4,21 @@ import com.spring.productInventory.Entity.Customer;
 import com.spring.productInventory.Entity.Product;
 import com.spring.productInventory.Entity.Supplier;
 import com.spring.productInventory.Entity.User;
+import com.spring.productInventory.Service.CartService;
 import com.spring.productInventory.Service.CustomerService;
 import com.spring.productInventory.Service.ProductService;
 import com.spring.productInventory.Service.UserService;
 import org.springframework.boot.Banner;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/customer")
@@ -23,11 +28,13 @@ public class CustomerController {
     private ProductService productService;
     private CustomerService customerService;
     private UserService userService;
+    private CartService cartService;
 
-    public CustomerController(ProductService productService, CustomerService customerService, UserService userService) {
+    public CustomerController(ProductService productService, CustomerService customerService, UserService userService, CartService cartService) {
         this.productService = productService;
         this.customerService = customerService;
         this.userService = userService;
+        this.cartService = cartService;
     }
 
     @GetMapping("/logout")
@@ -60,9 +67,16 @@ public class CustomerController {
     }
 
     @GetMapping("/products")
-    public String browseProducts(Model model){
+    public String browseProducts(Long customerId, Model model) {
+        //List<Product> products = cartService.getAllProducts();
+        Customer customer= customerService.getCustomerById(customerId).orElseThrow(()-> new RuntimeException("Customer Not found"));
         List<Product> products = productService.getAllProducts();
+        List<Long> productsInCart = cartService.getProductsInCart(customer.getId());
         model.addAttribute("products", products);
+        model.addAttribute("customer", customer);
+        model.addAttribute("productsInCart", productsInCart);
         return "browse-products";
     }
+
+
 }

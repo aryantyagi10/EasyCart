@@ -19,6 +19,7 @@ public class Cart {
     @ManyToMany
     private List<Product> products = new ArrayList<>();
 
+
     public Cart() {
     }
 

@@ -16,7 +16,7 @@ public class Product {
 
     private String description;
 
-    private BigDecimal price;
+    private Double price;
 
     @ManyToOne
     @JoinColumn(name = "supplier_id", nullable = false)
@@ -25,7 +25,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String name, String description, BigDecimal price, Supplier supplier) {
+    public Product(Long id, String name, String description, Double price, Supplier supplier) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -57,11 +57,11 @@ public class Product {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

@@ -1,27 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thmeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browse Products</title>
-    <link rel="stylesheet" th:href="@{/css/browse-products.css}"/>
+    <link rel="stylesheet" href="/css/browse-products.css">
 </head>
 <body>
-<div class="products-container">
+<div class="container">
     <header>
         <h1>Browse Products</h1>
-        <a th:href="@{/customer/dashboard?customerId=1}">Home</a>
+        <a th:href="@{/customer/dashboard(customerId=${customer.id})}" class="back-button">Back to Dashboard</a>
     </header>
+    <div>
+        <p th:if="${message}" th:text="${message}"
+           style="color: green;"></p>
+        <p th:if="${error}" th:text="${error}"
+           style="color: red;"></p>
+    </div>
     <div class="product-list">
+        <!-- Loop through products -->
         <div class="product-item" th:each="product : ${products}">
             <h2 th:text="${product.name}">Product Name</h2>
             <p th:text="${product.description}">Product Description</p>
-            <p>Price: ₹<span th:text="${product.price}">0.00</span></p>
+            <p>Price: ₹<span th:text="${product.price}">$0.00</span></p>
+            <!-- Add to cart Form -->
             <form th:action="@{/customer/add-to-cart}" method="post">
-                <input type="hidden" name="productId" th:value="${product.id}" />
-                <input type="hidden" name="customerId" th:value="${session.customerId}" />
-                <button type="submit" class="add-to-cart">Add to Cart</button>
-</form>
-</div>
-</div>
-</div>
+                <input type="hidden" name="productId" th:value="${product.id}"/>
+                <input type="hidden" name="customerId" th:value="${customer.id}"/>
+                <button class="add-to-cart" type="submit" th:if="${#lists.contains(productsInCart, product.id)} == false">Add to Cart</button>
+                <span class="added-message" th:if="${#lists.contains(productsInCart, product.id)} == true">Product Added to Cart</span>
+            </form>
+        </div>
+        </div>
+    </div>
 </body>
 </html>
